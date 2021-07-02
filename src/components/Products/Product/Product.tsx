@@ -9,8 +9,6 @@ import {
 } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
 
-import tempPhoto from '../../../assets/wallphoto.jpg';
-
 import useStyles from './styles';
 
 type ProductType = {
