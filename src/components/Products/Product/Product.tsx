@@ -13,16 +13,26 @@ import tempPhoto from '../../../assets/wallphoto.jpg';
 
 import useStyles from './styles';
 
-const Product = ({ product }): JSX.Element => {
+type ProductType = {
+  product: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+  };
+};
+
+const Product = ({ product }: ProductType): JSX.Element => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image={tempPhoto} />
+      <CardMedia className={classes.media} image={product.image} />
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5">{product.price}</Typography>
         </div>
-        <Typography variant="h2" color="textSecondary">
+        <Typography variant="body2" color="textSecondary">
           {product.description}
         </Typography>
       </CardContent>

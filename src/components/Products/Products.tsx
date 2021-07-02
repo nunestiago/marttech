@@ -2,20 +2,29 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import Product from './Product/Product';
 
-// type ProductTypes = {
-//   id: number;
-//   name: string;
-//   description: string;
-//   price: number;
-// };
-
-// interface ProductProps {
-//   product: ProductTypes;
-// }
+type ProductType = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+};
 
 const products = [
-  { id: 1, name: 'Shoes', description: 'Running shoes', price: 5 },
-  { id: 1, name: 'Shoes', description: 'Running shoes', price: 5 },
+  {
+    id: 1,
+    name: 'Shoes',
+    description: 'Running shoes',
+    price: 5,
+    image: 'https://picsum.photos/200/300',
+  },
+  {
+    id: 2,
+    name: 'Shoes',
+    description: 'Running shoes',
+    price: 5,
+    image: 'https://picsum.photos/200/300',
+  },
 ];
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
