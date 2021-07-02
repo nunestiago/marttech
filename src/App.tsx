@@ -1,9 +1,11 @@
 import React from 'react';
 
+import Nav from './components/Nav';
+
 function App(): JSX.Element {
   return (
     <div className="container">
-      <h1>Hello World</h1>
+      <Nav />
     </div>
   );
 }
