@@ -25,6 +25,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@types/material-ui": "^0.21.8",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "eslint-config-prettier": "^6.11.0",

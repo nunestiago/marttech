@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Nav from './components/Nav';
+import Products from './components/Products/Products';
 
 function App(): JSX.Element {
   return (
     <div className="container">
-      <Nav />
+      <Products />
     </div>
   );
 }
