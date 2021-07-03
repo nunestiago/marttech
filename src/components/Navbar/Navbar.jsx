@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
-import tempPhoto from '../../assets/index.jpeg';
+import tempPhoto from '../../assets/index.png';
 
 import useStyles from './styles';
 
