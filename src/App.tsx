@@ -6,7 +6,7 @@ function App(): JSX.Element {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
+    const { data }: any = await commerce.products.list();
     setProducts(data);
   };
 
