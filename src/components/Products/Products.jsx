@@ -20,22 +20,15 @@ import useStyles from './styles';
 //     image: 'https://picsum.photos/200/300',
 //   },
 // ];
-interface ProductType {
-  id: string;
-  name: string;
-  description: string;
-  price: { formatted_with_symbol: number };
-  media: { source: string };
-}
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const Products = ({ products }: any) => {
+const Products = ({ productCollection }) => {
   const classes = useStyles();
+  console.log(productCollection);
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Grid container justify="center" spacing={4}>
-        {products.map((product: ProductType) => (
+      <Grid container justify='center' spacing={4}>
+        {productCollection.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
             <Product product={product} />
           </Grid>

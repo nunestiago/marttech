@@ -11,17 +11,7 @@ import { AddShoppingCart } from '@material-ui/icons';
 
 import useStyles from './styles';
 
-interface ProductType {
-  product: {
-    id: string;
-    name: string;
-    description: string;
-    price: { formatted_with_symbol: string };
-    media: { source: string };
-  };
-}
-
-const Product = ({ product }: ProductType): JSX.Element => {
+const Product = ({ product }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -32,16 +22,18 @@ const Product = ({ product }: ProductType): JSX.Element => {
       />
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography variant="h5">
+          <Typography variant='h5'>
             {product.price.formatted_with_symbol}
           </Typography>
         </div>
-        <Typography variant="body2" color="textSecondary">
-          {product.description}
-        </Typography>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: product.description }}
+          variant='body2'
+          color='textSecondary'
+        />
       </CardContent>
       <CardActions className={classes.cardActions} disableSpacing>
-        <IconButton aria-label="add to cart">
+        <IconButton aria-label='add to cart'>
           <AddShoppingCart />
         </IconButton>
       </CardActions>
