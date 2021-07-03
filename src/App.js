@@ -16,9 +16,16 @@ function App() {
     setCart(response);
   };
 
+  const handleAddToCart = async (productId, quantity) => {
+    const response = await commerce.cart.add(productId, quantity);
+    setCart(response.cart);
+  };
+
   useEffect(() => {
     fetchProducts();
+    fetchCart();
     return () => {
+      fetchCart();
       fetchProducts();
     };
   }, []);
