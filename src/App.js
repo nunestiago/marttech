@@ -42,7 +42,7 @@ function App() {
               onAddToCart={handleAddToCart}
             />
           </Route>
-          <Route exact path='/'>
+          <Route exact path='/cart'>
             <Cart cart={cart}></Cart>
           </Route>
         </Switch>
