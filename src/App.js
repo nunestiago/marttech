@@ -32,8 +32,11 @@ function App() {
 
   return (
     <div className='container'>
-      <Navbar />
-      <Products productCollection={productCollection} />
+      <Navbar totalItems={cart.total_items} />
+      <Products
+        productCollection={productCollection}
+        onAddToCart={handleAddToCart}
+      />
     </div>
   );
 }

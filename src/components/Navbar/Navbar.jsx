@@ -11,20 +11,20 @@ import tempPhoto from '../../assets/index.jpeg';
 
 import useStyles from './styles';
 
-const Navbar = (): JSX.Element => {
+const Navbar = ({ totalItems }) => {
   const classes = useStyles();
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title} color="inherit">
-            <img src={tempPhoto} alt="MartTech commerce" height="25px" />
+          <Typography variant='h6' className={classes.title} color='inherit'>
+            <img src={tempPhoto} alt='MartTech commerce' height='25px' />
             MartTech Shop
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
+            <IconButton aria-label='Show cart items' color='inherit'>
+              <Badge badgeContent={totalItems} color='secondary'>
                 <ShoppingCart />
               </Badge>
             </IconButton>
