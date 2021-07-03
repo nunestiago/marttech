@@ -18,7 +18,26 @@ function App() {
   };
 
   const handleAddToCart = async (productId, quantity) => {
-    const response = await commerce.cart.add(productId, quantity);
+    const item = await commerce.cart.add(productId, quantity);
+
+    setCart(item.cart);
+  };
+
+  const handleUpdateCartQty = async (lineItemId, quantity) => {
+    const response = await commerce.cart.update(lineItemId, { quantity });
+
+    setCart(response.cart);
+  };
+
+  const handleRemoveFromCart = async (lineItemId) => {
+    const response = await commerce.cart.remove(lineItemId);
+
+    setCart(response.cart);
+  };
+
+  const handleEmptyCart = async () => {
+    const response = await commerce.cart.empty();
+
     setCart(response.cart);
   };
 
@@ -43,7 +62,12 @@ function App() {
             />
           </Route>
           <Route exact path='/cart'>
-            <Cart cart={cart}></Cart>
+            <Cart
+              cart={cart}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
+              onEmptyCart={handleEmptyCart}
+            />
           </Route>
         </Switch>
       </div>
