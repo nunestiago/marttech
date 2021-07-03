@@ -1,10 +1,11 @@
 import React from 'react';
 
-import Products from './components/Products/Products';
+import { Products, Navbar } from './components';
 
 function App(): JSX.Element {
   return (
     <div className="container">
+      <Navbar />
       <Products />
     </div>
   );
