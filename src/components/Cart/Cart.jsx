@@ -4,7 +4,7 @@ import useStyles from './styles';
 
 function Cart({ cart }) {
   const classes = useStyles();
-  const isEmpty = !cart.line_items.length; // === 0
+
   const EmptyCart = () => (
     <Typography variant='subtitle1'>
       You don't have any item in the cart yet, BUY!
@@ -46,12 +46,15 @@ function Cart({ cart }) {
       </div>
     </>
   );
+
+  if (!cart.line_items) return 'Loading...';
+
   return (
     <Container>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant='h3'>
         Your Shopping Cart
-        {isEmpty ? <EmptyCart /> : <FilledCart />}
+        {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
       </Typography>
     </Container>
   );
