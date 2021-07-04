@@ -1,33 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { commerce } from './lib/commerce';
-import { Products, Navbar } from './components';
+import './App.css';
+import { Navbar } from './components';
+import { Login, Register, Main, Cart } from './pages';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  const [productCollection, setproductCollection] = useState([]);
-  const [cart, setCart] = useState({});
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setproductCollection(data);
-  };
-
-  const fetchCart = async () => {
-    const response = await commerce.cart.retrieve();
-    setCart(response);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    return () => {
-      fetchProducts();
-    };
-  }, []);
-
   return (
-    <div className='container'>
+    <Router>
       <Navbar />
-      <Products productCollection={productCollection} />
-    </div>
+      <Switch>
+        <Route path='/' exact component={Main} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route path='/cart' component={Cart} />
+      </Switch>
+    </Router>
   );
 }
 
