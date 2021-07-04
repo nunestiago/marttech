@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -48,6 +49,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
+  const [data, setData] = useState({});
+
+  function capturarDados(chave, valor) {
+    return localStorage.setItem(chave, valor);
+  }
+
+  function consultarDados(chave) {
+    alert(local);
+  }
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -58,7 +69,7 @@ export default function Login() {
         <Typography component='h1' variant='h5'>
           Acesso
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             variant='outlined'
             margin='normal'
@@ -68,6 +79,7 @@ export default function Login() {
             label='Email'
             name='email'
             autoComplete='email'
+            type='email'
             autoFocus
           />
           <TextField
