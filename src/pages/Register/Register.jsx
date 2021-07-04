@@ -56,10 +56,12 @@ export default function Register() {
     lastname: '',
     email: '',
     address: '',
-    number: 0,
+    number: '',
     password: '',
     cep: '',
   });
+
+  console.log(data);
 
   function capturarDados(chave, valor) {
     return localStorage.setItem(chave, valor);
@@ -92,18 +94,20 @@ export default function Register() {
                 label='Nome'
                 autoFocus
                 value={data.name}
+                onChange={(e) => setData((data.name = e.target.value))}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 variant='outlined'
                 required
-                fullWidth
+                fullWidthdata
                 id='lastName'
                 label='Sobrenome'
                 name='lastName'
                 autoComplete='lname'
                 value={data.lastname}
+                onChange={(e) => setData((data.lastname = e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>
@@ -117,6 +121,7 @@ export default function Register() {
                 type='email'
                 autoComplete='email'
                 value={data.email}
+                onChange={(e) => setData((data.email = e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,6 +135,7 @@ export default function Register() {
                 type='address'
                 autoComplete='address'
                 value={data.address}
+                onChange={(e) => setData((data.address = e.target.value))}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -141,6 +147,7 @@ export default function Register() {
                 id='addressNumber'
                 label='Número'
                 value={data.number}
+                onChange={(e) => setData((data.number = e.target.value))}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -153,6 +160,7 @@ export default function Register() {
                 name='cep'
                 autoComplete='cep'
                 value={data.cep}
+                onChange={(e) => setData((data.cep = e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>
@@ -165,7 +173,8 @@ export default function Register() {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-                value={data.}
+                value={data.password}
+                onChange={(e) => setData((data.password = e.target.value))}
               />
             </Grid>
           </Grid>

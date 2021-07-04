@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -32,17 +32,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Cart({ cartItems, addToCart, removeFromCart }) {
+function Cart({ cartItems, addToCart, removeFromCart, setCartItems }) {
   const classes = useStyles();
+  const storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+
   const calculateTotal = (items) => {
-    items.reduce((ack, item) => ack + item.amount * item.price, 0);
+    // items.reduce((ack, item) => ack + item.amount * item.price, 0);
+    console.log(items);
+    return '0';
   };
-  console.log(typeof cartItems);
+
   return (
     <Container>
       <h2>Your Shopping Cart</h2>
-      {/* {cartItems.length === 0 ? <p>No items in cart.</p> : null}
-      {cartItems.map((item) => (
+
+      {storedCart.length === 0 ? <p>No items in cart.</p> : null}
+      {storedCart.map((item) => (
         <CartItem
           key={item.id}
           item={item}
@@ -50,7 +55,7 @@ function Cart({ cartItems, addToCart, removeFromCart }) {
           removeFromCart={removeFromCart}
         />
       ))}
-      <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2> */}
+      <h2>Total: ${calculateTotal(storedCart)}</h2>
     </Container>
   );
 }

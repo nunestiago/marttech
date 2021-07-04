@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,8 @@ import { Cart } from '../index';
 import { useQuery } from 'react-query';
 import { LinearProgress } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
+import { createBrowserHistory } from 'history';
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -49,6 +51,10 @@ export default function Main() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { data, isLoading, error } = useQuery('products', getProducts);
+
+  useEffect(() => {
+    window.localStorage.setItem('cartItems', JSON.stringify([...cartItems]));
+  }, [cartItems]);
 
   const handleAddToCart = (clickedItem) => {
     setCartItems((prev) => {
@@ -118,6 +124,7 @@ export default function Main() {
         >
           <Cart
             cartItems={[...cartItems]}
+            setCartItems={setCartItems}
             addToCart={handleAddToCart}
             removeFromCart={handleRemoveFromCart}
           />
