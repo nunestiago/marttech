@@ -1,54 +1,47 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Badge,
-  Typography,
-} from '@material-ui/core';
-import { ShoppingCart } from '@material-ui/icons';
-import tempPhoto from '../../assets/index.png';
-import { Link, useLocation } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
-import useStyles from './styles';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-const Navbar = ({ totalItems }) => {
+export default function ButtonAppBar() {
   const classes = useStyles();
-  const location = useLocation();
 
   return (
-    <>
-      <AppBar position='fixed' className={classes.appBar}>
+    <div className={classes.root}>
+      <AppBar position='static'>
         <Toolbar>
-          <Typography
-            component={Link}
-            to='/'
-            variant='h6'
-            className={classes.title}
+          <IconButton
+            edge='start'
+            className={classes.menuButton}
             color='inherit'
+            aria-label='menu'
           >
-            <img src={tempPhoto} alt='MartTech commerce' height='25px' />
-            MartTech Shop
+            <MenuIcon />
+          </IconButton>
+          <Typography variant='h6' className={classes.title}>
+            E-commerce
           </Typography>
-          <div className={classes.grow} />
-          {location.pathname === '/' && (
-            <div className={classes.button}>
-              <IconButton
-                component={Link}
-                to='/cart'
-                aria-label='Show cart items'
-                color='inherit'
-              >
-                <Badge badgeContent={totalItems} color='secondary'>
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-            </div>
-          )}
+          <Button color='inherit'>Login</Button>
+          <Button color='inherit'>Register</Button>
+          <Button color='inherit'>Shop</Button>
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
-};
-
-export default Navbar;
+}
