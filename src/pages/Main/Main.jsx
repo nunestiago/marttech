@@ -53,8 +53,12 @@ export default function Main() {
   const { data, isLoading, error } = useQuery('products', getProducts);
 
   useEffect(() => {
-    window.localStorage.setItem('cartItems', JSON.stringify([...cartItems]));
-  }, [cartItems]);
+    window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    setCartItems(JSON.parse(window.localStorage.getItem('cartItems')));
+    return () => {
+      window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    };
+  }, []);
 
   const handleAddToCart = (clickedItem) => {
     setCartItems((prev) => {
@@ -70,7 +74,6 @@ export default function Main() {
       // First time the item is added
       return [...prev, { ...clickedItem, amount: 1 }];
     });
-    console.log(cartItems);
   };
 
   const handleRemoveFromCart = (id) => {
@@ -86,14 +89,8 @@ export default function Main() {
     );
   };
 
-  if (isLoading) return <LinearProgress />;
-  if (error) return <div>Algo deu errado ...</div>;
-
-  return (
-    <React.Fragment>
-      <CssBaseline />
-
-      {/* Hero unit */}
+  if (isLoading)
+    return (
       <div className={classes.heroContent}>
         <Container maxWidth='sm'>
           <Typography
@@ -113,29 +110,39 @@ export default function Main() {
           >
             Veja abaixo os itens disponíveis.
           </Typography>
+          <LinearProgress />
         </Container>
       </div>
+    );
+  if (error) return <div>Algo deu errado ...</div>;
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+
+      {/* Hero unit */}
+      <div className={classes.heroContent}></div>
       <Container className={classes.cardGrid} maxWidth='md'>
         {/* End hero unit */}
+        <Grid container spacing={4}>
+          {data.map((item) => (
+            <Grid item key={item.id} xs={12} sm={6} md={4}>
+              <CardComp item={item} addToCart={(e) => handleAddToCart(e)} />
+            </Grid>
+          ))}
+        </Grid>
         <Drawer
           anchor='right'
           open={cartOpen}
           onClose={() => setCartOpen(false)}
         >
           <Cart
-            cartItems={[...cartItems]}
+            cartItems={cartItems}
             setCartItems={setCartItems}
             addToCart={handleAddToCart}
             removeFromCart={handleRemoveFromCart}
           />
         </Drawer>
-        <Grid container spacing={4}>
-          {data.map((item) => (
-            <Grid item key={item.id} xs={12} sm={6} md={4}>
-              <CardComp item={item} addToCart={handleAddToCart} />
-            </Grid>
-          ))}
-        </Grid>
       </Container>
     </React.Fragment>
   );

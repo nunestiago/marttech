@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Badge from '@material-ui/core/Badge';
 
 import { Link } from 'react-router-dom';
 
@@ -24,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  let storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+  function countItems() {
+    storedCart.reduce((acc, item) => acc + item.amount);
+  }
 
   return (
     <div className={classes.root}>
@@ -55,7 +60,9 @@ export default function ButtonAppBar() {
             Register
           </Button>
           <Button component={Link} to='Cart' color='inherit'>
-            Cart
+            <Badge badgeContent={countItems()} color='secondary'>
+              Cart .
+            </Badge>
           </Button>
         </Toolbar>
       </AppBar>

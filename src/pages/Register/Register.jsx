@@ -51,17 +51,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
 
-  const [data, setData] = useState({
-    name: '',
-    lastname: '',
+  const initialValue = {
+    firstName: '',
+    lastName: '',
     email: '',
     address: '',
     number: '',
     password: '',
     cep: '',
-  });
+  };
 
-  console.log(data);
+  const [data, setData] = useState(initialValue);
+
+  function onChange(event) {
+    // const { name, value } = event.target;
+
+    console.log(event.name);
+
+    setData(event.target.name);
+  }
 
   function capturarDados(chave, valor) {
     return localStorage.setItem(chave, valor);
@@ -93,8 +101,8 @@ export default function Register() {
                 id='firstName'
                 label='Nome'
                 autoFocus
-                value={data.name}
-                onChange={(e) => setData((data.name = e.target.value))}
+                value={data.firstName}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -106,8 +114,8 @@ export default function Register() {
                 label='Sobrenome'
                 name='lastName'
                 autoComplete='lname'
-                value={data.lastname}
-                onChange={(e) => setData((data.lastname = e.target.value))}
+                value={data.lastName}
+                onChange={(e) => setData(onChange)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -121,7 +129,7 @@ export default function Register() {
                 type='email'
                 autoComplete='email'
                 value={data.email}
-                onChange={(e) => setData((data.email = e.target.value))}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -135,7 +143,7 @@ export default function Register() {
                 type='address'
                 autoComplete='address'
                 value={data.address}
-                onChange={(e) => setData((data.address = e.target.value))}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -147,7 +155,7 @@ export default function Register() {
                 id='addressNumber'
                 label='Número'
                 value={data.number}
-                onChange={(e) => setData((data.number = e.target.value))}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -160,7 +168,7 @@ export default function Register() {
                 name='cep'
                 autoComplete='cep'
                 value={data.cep}
-                onChange={(e) => setData((data.cep = e.target.value))}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -174,7 +182,7 @@ export default function Register() {
                 id='password'
                 autoComplete='current-password'
                 value={data.password}
-                onChange={(e) => setData((data.password = e.target.value))}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
           </Grid>
@@ -184,6 +192,7 @@ export default function Register() {
             variant='contained'
             color='primary'
             className={classes.submit}
+            onClick={() => console.log(data)}
           >
             Registrar
           </Button>

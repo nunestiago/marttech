@@ -1,15 +1,6 @@
 import React, { useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { CartItem } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,14 +23,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Cart({ cartItems, addToCart, removeFromCart, setCartItems }) {
+function Cart({ cartItems, addToCart, removeFromCart }) {
   const classes = useStyles();
-  const storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+  let storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+  useEffect(() => {
+    storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+    return () => {
+      window.localStorage.setItem('cartItems', JSON.stringify(storedCart));
+    };
+  }, []);
+  console.log(cartItems);
 
-  const calculateTotal = (items) => {
-    // items.reduce((ack, item) => ack + item.amount * item.price, 0);
-    console.log(items);
-    return '0';
+  const calculateTotal = () => {
+    return storedCart.reduce((acc, item) => console.log(item), 0);
   };
 
   return (
@@ -55,7 +51,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setCartItems }) {
           removeFromCart={removeFromCart}
         />
       ))}
-      <h2>Total: ${calculateTotal(storedCart)}</h2>
+      <h2>Total: ${calculateTotal()}</h2>
     </Container>
   );
 }
