@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Link as RLink } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -57,7 +58,7 @@ export default function Register() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Sign up
+          Registro
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -69,7 +70,7 @@ export default function Register() {
                 required
                 fullWidth
                 id='firstName'
-                label='First Name'
+                label='Nome'
                 autoFocus
               />
             </Grid>
@@ -79,7 +80,7 @@ export default function Register() {
                 required
                 fullWidth
                 id='lastName'
-                label='Last Name'
+                label='Sobrenome'
                 name='lastName'
                 autoComplete='lname'
               />
@@ -90,7 +91,7 @@ export default function Register() {
                 required
                 fullWidth
                 id='email'
-                label='Email Address'
+                label='Email'
                 name='email'
                 autoComplete='email'
               />
@@ -101,16 +102,10 @@ export default function Register() {
                 required
                 fullWidth
                 name='password'
-                label='Password'
+                label='Senha'
                 type='password'
                 id='password'
                 autoComplete='current-password'
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
               />
             </Grid>
           </Grid>
@@ -121,12 +116,12 @@ export default function Register() {
             color='primary'
             className={classes.submit}
           >
-            Sign Up
+            Registrar
           </Button>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Link href='#' variant='body2'>
-                Already have an account? Sign in
+              <Link component={RLink} to='Login' variant='body2'>
+                Já tem uma conta? Entre aqui!
               </Link>
             </Grid>
           </Grid>

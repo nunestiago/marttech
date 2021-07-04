@@ -27,7 +27,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='fixed' sticky>
         <Toolbar>
           <IconButton
             edge='start'
