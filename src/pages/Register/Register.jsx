@@ -51,7 +51,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    address: '',
+    number: 0,
+    password: '',
+    cep: '',
+  });
 
   function capturarDados(chave, valor) {
     return localStorage.setItem(chave, valor);
@@ -83,6 +91,7 @@ export default function Register() {
                 id='firstName'
                 label='Nome'
                 autoFocus
+                value={data.name}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -94,6 +103,7 @@ export default function Register() {
                 label='Sobrenome'
                 name='lastName'
                 autoComplete='lname'
+                value={data.lastname}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +116,7 @@ export default function Register() {
                 name='email'
                 type='email'
                 autoComplete='email'
+                value={data.email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -118,6 +129,7 @@ export default function Register() {
                 name='address'
                 type='address'
                 autoComplete='address'
+                value={data.address}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -128,6 +140,7 @@ export default function Register() {
                 fullWidth
                 id='addressNumber'
                 label='Número'
+                value={data.number}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -139,6 +152,7 @@ export default function Register() {
                 label='CEP'
                 name='cep'
                 autoComplete='cep'
+                value={data.cep}
               />
             </Grid>
             <Grid item xs={12}>
@@ -151,6 +165,7 @@ export default function Register() {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                value={data.}
               />
             </Grid>
           </Grid>

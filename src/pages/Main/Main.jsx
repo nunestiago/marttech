@@ -5,9 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { CardComp } from '../../components/index';
+import { Cart } from '../index';
 import { useQuery } from 'react-query';
 import { LinearProgress } from '@material-ui/core';
-
+import Drawer from '@material-ui/core/Drawer';
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -45,6 +46,7 @@ const getProducts = async () =>
 
 export default function Main() {
   const classes = useStyles();
+  const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { data, isLoading, error } = useQuery('products', getProducts);
 
@@ -63,6 +65,19 @@ export default function Main() {
       return [...prev, { ...clickedItem, amount: 1 }];
     });
     console.log(cartItems);
+  };
+
+  const handleRemoveFromCart = (id) => {
+    setCartItems((prev) =>
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...ack, item];
+        }
+      }, [])
+    );
   };
 
   if (isLoading) return <LinearProgress />;
@@ -96,6 +111,17 @@ export default function Main() {
       </div>
       <Container className={classes.cardGrid} maxWidth='md'>
         {/* End hero unit */}
+        <Drawer
+          anchor='right'
+          open={cartOpen}
+          onClose={() => setCartOpen(false)}
+        >
+          <Cart
+            cartItems={[...cartItems]}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        </Drawer>
         <Grid container spacing={4}>
           {data.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4}>
