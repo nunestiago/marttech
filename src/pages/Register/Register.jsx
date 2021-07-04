@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -50,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
 
+  const [data, setData] = useState({});
+
+  function capturarDados(chave, valor) {
+    return localStorage.setItem(chave, valor);
+  }
+
+  function consultarDados(chave) {
+    alert(localStorage.getItem(chave));
+  }
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -95,6 +106,39 @@ export default function Register() {
                 name='email'
                 type='email'
                 autoComplete='email'
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='address'
+                label='Endereço'
+                name='address'
+                type='address'
+                autoComplete='address'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                name='number'
+                variant='outlined'
+                required
+                fullWidth
+                id='addressNumber'
+                label='Número'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='cep'
+                label='CEP'
+                name='cep'
+                autoComplete='cep'
               />
             </Grid>
             <Grid item xs={12}>

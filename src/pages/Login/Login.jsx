@@ -49,16 +49,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
-  const [data, setData] = useState({});
-
-  function capturarDados(chave, valor) {
-    return localStorage.setItem(chave, valor);
-  }
-
-  function consultarDados(chave) {
-    alert(local);
-  }
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
