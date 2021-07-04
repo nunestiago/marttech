@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
   },
 }));
 
@@ -34,12 +37,26 @@ export default function ButtonAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' className={classes.title}>
+          <Typography
+            component={Link}
+            to='/'
+            variant='h6'
+            className={classes.title}
+          >
             E-commerce
           </Typography>
-          <Button color='inherit'>Login</Button>
-          <Button color='inherit'>Register</Button>
-          <Button color='inherit'>Shop</Button>
+          <Button component={Link} to='/' color='inherit'>
+            Home
+          </Button>
+          <Button component={Link} to='Login' color='inherit'>
+            Login
+          </Button>
+          <Button component={Link} to='Register' color='inherit'>
+            Register
+          </Button>
+          <Button component={Link} to='Cart' color='inherit'>
+            Cart
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
