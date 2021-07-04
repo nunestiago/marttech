@@ -9,7 +9,6 @@ import { Cart } from '../index';
 import { useQuery } from 'react-query';
 import { LinearProgress } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
-import { createBrowserHistory } from 'history';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -53,12 +52,12 @@ export default function Main() {
   const { data, isLoading, error } = useQuery('products', getProducts);
 
   useEffect(() => {
-    window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
     setCartItems(JSON.parse(window.localStorage.getItem('cartItems')));
+    window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
     return () => {
       window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
     };
-  }, []);
+  }, [cartItems]);
 
   const handleAddToCart = (clickedItem) => {
     setCartItems((prev) => {

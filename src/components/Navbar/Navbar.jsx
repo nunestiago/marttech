@@ -25,9 +25,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  let storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
   function countItems() {
-    storedCart.reduce((acc, item) => acc + item.amount);
+    let storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+    console.log(storedCart);
+    if (storedCart)
+      return storedCart.reduce((acc, item) => acc + item.amount, 0);
+    return 0;
   }
 
   return (
