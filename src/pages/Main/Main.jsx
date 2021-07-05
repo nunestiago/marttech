@@ -52,11 +52,15 @@ export default function Main() {
   const { data, isLoading, error } = useQuery('products', getProducts);
 
   useEffect(() => {
-    setCartItems(JSON.parse(window.localStorage.getItem('cartItems')));
-    window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    return () => {
-      window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    };
+    const storageData = localStorage.getItem('cartItems');
+
+    if (storageData) {
+      setCartItems(JSON.parse(storageData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const handleAddToCart = (clickedItem) => {

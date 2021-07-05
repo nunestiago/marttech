@@ -49,6 +49,39 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
+  const [infoLogin, setInfoLogin] = useState({});
+  const storageData = localStorage.getItem('user');
+  const parsedData = JSON.parse(storageData);
+
+  let formLogin = {
+    email: '',
+    password: '',
+    isLogged: false,
+  };
+
+  function onSubmit(e) {
+    e.preventDefault();
+    setInfoLogin(formLogin);
+    infoValidation();
+  }
+
+  function getEmail(event) {
+    return (formLogin.email = event.target.value);
+  }
+
+  function getPassword(event) {
+    return (formLogin.password = event.target.value);
+  }
+
+  function infoValidation() {
+    if (
+      infoLogin.email === parsedData.email &&
+      infoLogin.password === parsedData.password
+    ) {
+      return (formLogin.isLogged = true);
+    }
+  }
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -71,6 +104,7 @@ export default function Login() {
             autoComplete='email'
             type='email'
             autoFocus
+            onChange={(event) => getEmail(event)}
           />
           <TextField
             variant='outlined'
@@ -82,6 +116,7 @@ export default function Login() {
             type='password'
             id='password'
             autoComplete='current-password'
+            onChange={(event) => getPassword(event)}
           />
           <Button
             type='submit'
@@ -89,17 +124,22 @@ export default function Login() {
             variant='contained'
             color='primary'
             className={classes.submit}
+            onClick={(e) => onSubmit(e)}
           >
             Entrar
           </Button>
           <Grid container>
             <Grid item>
+              {infoLogin.isLogged && (
+                <p>Seja bem vindo {parsedData.firstName}</p>
+              )}
               <Link component={RLink} to='Register' variant='body2'>
                 {'Não tem conta? Crie uma!'}
               </Link>
             </Grid>
           </Grid>
         </form>
+        {console.log(infoLogin)}
       </div>
       <Box mt={8}>
         <Copyright />

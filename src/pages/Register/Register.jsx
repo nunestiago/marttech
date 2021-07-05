@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -50,7 +50,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
 
-  const initialValue = {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const storageData = localStorage.getItem('user');
+
+    if (storageData) {
+      setData(JSON.parse(storageData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(data));
+  }, [data]);
+
+  let formData = {
     firstName: '',
     lastName: '',
     email: '',
@@ -60,20 +74,37 @@ export default function Register() {
     cep: '',
   };
 
-  const [data, setData] = useState(initialValue);
-
-  function onChange(event) {
-    if (event.target.getAttribute('name') === 'firstName') {
-      setData();
-    }
+  function onChangeName(event) {
+    return (formData.firstName = event.target.value);
   }
 
-  function capturarDados(chave, valor) {
-    return localStorage.setItem(chave, valor);
+  function onChangeLastName(event) {
+    return (formData.lastName = event.target.value);
   }
 
-  function consultarDados(chave) {
-    alert(localStorage.getItem(chave));
+  function onChangeEmail(event) {
+    return (formData.email = event.target.value);
+  }
+
+  function onChangeAddress(event) {
+    return (formData.address = event.target.value);
+  }
+
+  function onChangeNumber(event) {
+    return (formData.number = event.target.value);
+  }
+
+  function onChangePassword(event) {
+    return (formData.password = event.target.value);
+  }
+
+  function onChangeCep(event) {
+    return (formData.cep = event.target.value);
+  }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    setData(formData);
   }
 
   return (
@@ -98,8 +129,7 @@ export default function Register() {
                 id='firstName'
                 label='Nome'
                 autoFocus
-                value={data.firstName}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeName(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -111,8 +141,7 @@ export default function Register() {
                 label='Sobrenome'
                 name='lastName'
                 autoComplete='lname'
-                value={data.lastName}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeLastName(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -125,8 +154,7 @@ export default function Register() {
                 name='email'
                 type='email'
                 autoComplete='email'
-                value={data.email}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeEmail(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -139,8 +167,7 @@ export default function Register() {
                 name='address'
                 type='address'
                 autoComplete='address'
-                value={data.address}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeAddress(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -151,8 +178,7 @@ export default function Register() {
                 fullWidth
                 id='addressNumber'
                 label='Número'
-                value={data.number}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeNumber(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -164,8 +190,7 @@ export default function Register() {
                 label='CEP'
                 name='cep'
                 autoComplete='cep'
-                value={data.cep}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangeCep(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -178,8 +203,7 @@ export default function Register() {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-                value={data.password}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChangePassword(e)}
               />
             </Grid>
           </Grid>
@@ -189,10 +213,11 @@ export default function Register() {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={() => console.log(data)}
+            onClick={(e) => onSubmit(e)}
           >
             Registrar
           </Button>
+          {console.log(data)}
           <Grid container justify='flex-end'>
             <Grid item>
               <Link component={RLink} to='Login' variant='body2'>

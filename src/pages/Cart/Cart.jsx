@@ -5,6 +5,7 @@ import { CartItem } from '../../components';
 
 function Cart({ cartItems, addToCart, removeFromCart }) {
   let storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
+
   useEffect(() => {
     storedCart = JSON.parse(window.localStorage.getItem('cartItems'));
   }, []);
