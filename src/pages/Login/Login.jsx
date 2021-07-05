@@ -62,7 +62,7 @@ export default function Login() {
   function onSubmit(e) {
     e.preventDefault();
     setInfoLogin(formLogin);
-    validarInformações();
+    infoValidation();
   }
 
   function getEmail(event) {
@@ -73,7 +73,7 @@ export default function Login() {
     return (formLogin.password = event.target.value);
   }
 
-  function validarInformações() {
+  function infoValidation() {
     if (
       infoLogin.email === parsedData.email &&
       infoLogin.password === parsedData.password
